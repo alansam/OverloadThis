@@ -110,6 +110,7 @@ long constexpr double operator""_mm(unsigned long long val) {
 } /* namespace cvt::si::si_literals */
 
 namespace cvt::angular {
+
 auto deg_to_rad = [](long double deg) -> long double {
   auto radians = deg * std::numbers::pi_v<long double> / 180.0l;
   return radians;
@@ -119,6 +120,8 @@ auto rad_to_deg = [](long double radians) -> long double {
   auto deg = radians / (std::numbers::pi_v<long double> / 180.0l);
   return deg;
 };
+
+void conversions(void);
 
 } /* namespace cvt::angular */
 
@@ -131,7 +134,15 @@ auto far_to_cel = [](long double far) -> long double {
   return (far - 32.0l) / 1.8l;
 };
 
+void conversions(void);
+
 } /* namespace cvt::temp */
+
+namespace cvt::si {
+
+void conversions(void);
+
+} /* namespace cvt::si */
 
 using namespace cvt::angular::angular_literals;
 using namespace cvt::temp::temp_literals;
@@ -140,7 +151,28 @@ using namespace cvt::si::si_literals;
 /*
  *  MARK: main()
  */
-int main() {
+int main(int argc, char const * argv[]) {
+  std::cout << "In "
+            << __func__ << "()\n";
+
+  cvt::angular::conversions();
+
+  cvt::temp::conversions();
+
+  cvt::si::conversions();
+
+  return 0;
+}
+
+namespace cvt::angular {
+
+/*
+ *  MARK: cvt::angular::conversions()
+ */
+void conversions(void) {
+  std::cout << "In function cvt::angular::"
+            << __func__ << "()\n";
+
   std::cout << std::fixed;
   for (auto deg { 0.0l }; deg <= 360.0l; deg += 7.5l) {
     std::cout << std::setw(10)
@@ -149,7 +181,7 @@ int main() {
               << "\u00b0 ="s
               << std::setprecision(6)
               << std::setw(10)
-              << cvt::angular::deg_to_rad(deg)
+              << deg_to_rad(deg)
               << " radians."s
               << '\n';
   }
@@ -167,7 +199,7 @@ int main() {
               << "\u22c5\u03c0] ="s
               << std::setprecision(1)
               << std::setw(10)
-              << cvt::angular::rad_to_deg(rdns)
+              << rad_to_deg(rdns)
               << "\u00b0."s
               << '\n';
   }
@@ -180,7 +212,7 @@ int main() {
               << " radians ="s
               << std::setprecision(2)
               << std::setw(10)
-              << cvt::angular::rad_to_deg(rad)
+              << rad_to_deg(rad)
               << "\u00b0."s
               << '\n';
   }
@@ -260,6 +292,22 @@ int main() {
             << 6.5_reg_to_deg << "\u00b0."s << '\n';
   std::cout << std::endl;
 
+  std::cout << std::setprecision(6);
+
+  return;
+}
+
+} /* namespace cvt::angular */
+
+namespace cvt::temp {
+
+/*
+ *  MARK: cvt::temp::conversions()
+ */
+void conversions(void) {
+  std::cout << "In function cvt::temp::"
+            << __func__ << "()\n";
+
   std::cout << std::setprecision(2);
   std::cout << "  -40\u00b0C = "
             << std::setw(7) << cvt::temp::cel_to_far(-40.0l)
@@ -326,6 +374,18 @@ int main() {
             << std::setw(7) << 212.0_F_to_C
             << "\u00b0C\n";
   std::cout << std::endl;
+  std::cout << std::setprecision(6);
+
+  return;
+}
+
+} /* namespace cvt::temp */
+
+namespace cvt::si {
+
+void conversions(void) {
+  std::cout << "In function si::"
+            << __func__ << "()\n";
 
   std::cout << std::setprecision(3);
   std::cout << " 1,000.5  m =" << std::setw(10)
@@ -353,6 +413,9 @@ int main() {
   std::cout << "100.8 m + 2 km + 150 mm =" << std::setw(10)
             <<          mk << '\n';
   std::cout << std::endl;
+  std::cout << std::setprecision(6);
 
-  return 0;
+  return;
 }
+
+} /* namespace cvt::si */
