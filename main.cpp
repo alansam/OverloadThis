@@ -5,6 +5,8 @@
 
 using namespace std::literals::string_literals;
 
+// .+....|....+....|....+....|....+....|....+....|....+....|
+// MARK: - cvt::angular::angular_literals - Definitions.
 namespace cvt::angular::angular_literals {
 
 /*
@@ -31,6 +33,8 @@ constexpr long double operator""_reg_to_deg(long double radians) {
 
 } /* namespace cvt::angular::angular_literals */
 
+// .+....|....+....|....+....|....+....|....+....|....+....|
+// MARK: - cvt::temp::temp_literals - Definitions.
 namespace cvt::temp::temp_literals {
 /*
  *  MARK: operator""_C_to_F()
@@ -52,6 +56,8 @@ constexpr long double operator""_F_to_C(long double far) {
 
 } /*namespace cvt::temp::temp_literals */
 
+// .+....|....+....|....+....|....+....|....+....|....+....|
+// MARK: - cvt::si::si_literals - Definitions.
 namespace cvt::si::si_literals {
 /*
  *  MARK: operator""_m(long double val)
@@ -109,6 +115,8 @@ long constexpr double operator""_mm(unsigned long long val) {
 
 } /* namespace cvt::si::si_literals */
 
+// .+....|....+....|....+....|....+....|....+....|....+....|
+// MARK: - cvt::angular - Definitions.
 namespace cvt::angular {
 
 auto deg_to_rad = [](long double deg) -> long double {
@@ -125,6 +133,8 @@ void conversions(void);
 
 } /* namespace cvt::angular */
 
+// .+....|....+....|....+....|....+....|....+....|....+....|
+// MARK: - cvt::temp - Definitions.
 namespace cvt::temp {
 auto cel_to_far = [](long double cel) -> long double {
   return (cel * 1.8l) + 32.0l;
@@ -138,12 +148,15 @@ void conversions(void);
 
 } /* namespace cvt::temp */
 
+// .+....|....+....|....+....|....+....|....+....|....+....|
+// MARK: - cvt::si - Definitions.
 namespace cvt::si {
 
 void conversions(void);
 
 } /* namespace cvt::si */
 
+//  MARK: - Implementation.
 using namespace cvt::angular::angular_literals;
 using namespace cvt::temp::temp_literals;
 using namespace cvt::si::si_literals;
@@ -164,6 +177,8 @@ int main(int argc, char const * argv[]) {
   return 0;
 }
 
+// .+....|....+....|....+....|....+....|....+....|....+....|
+// MARK: - cvt::angular - Implementation.
 namespace cvt::angular {
 
 /*
@@ -187,13 +202,13 @@ void conversions(void) {
   }
   std::cout << std::endl;
 
-  for (auto fctr { 0.0l }; fctr <= 4.0l; fctr += 0.25l) {
-    auto rdns = std::numbers::pi_v<long double> * fctr / 2;
+  for (auto fctr { 0.0l }; fctr <= 2.0l; fctr += 0.125l) {
+    auto rdns = std::numbers::pi_v<long double> * fctr;
     std::cout << std::setw(10)
               << std::setprecision(6)
               << rdns
               << " radians ["s
-              << std::setprecision(2)
+              << std::setprecision(3)
               << std::setw(4)
               << fctr
               << "\u22c5\u03c0] ="s
@@ -254,41 +269,42 @@ void conversions(void) {
             << 360._deg_to_rad << " radians."s << '\n';
   std::cout << std::endl;
 
-  std::cout << "  0.0 radian ="s << std::setw(10)
+  std::cout << std::setprecision(3);
+  std::cout << "   0.0 radians ="s << std::setw(9)
             << 0.0_reg_to_deg << "\u00b0."s << '\n';
-  std::cout << "  0.5 radian ="s << std::setw(10)
+  std::cout << "   0.5 radians ="s << std::setw(9)
             << 0.5_reg_to_deg << "\u00b0."s << '\n';
-  std::cout << "  1.0 radian ="s << std::setw(10)
+  std::cout << "   1.0 radians ="s << std::setw(9)
             << 1.0_reg_to_deg << "\u00b0."s << '\n';
-  std::cout << "  1.5 radian ="s << std::setw(10)
+  std::cout << "   1.5 radians ="s << std::setw(9)
             << 1.5_reg_to_deg << "\u00b0."s << '\n';
-  std::cout << "  π/2 radian ="s << std::setw(10)
+  std::cout << "   \u03c0\u00f72 radians ="s << std::setw(9)
             << 1.57079632679_reg_to_deg << "\u00b0."s << '\n';
-  std::cout << "  2.0 radian ="s << std::setw(10)
+  std::cout << "   2.0 radians ="s << std::setw(9)
             << 2.0_reg_to_deg << "\u00b0."s << '\n';
-  std::cout << "  2.5 radian ="s << std::setw(10)
+  std::cout << "   2.5 radians ="s << std::setw(9)
             << 2.5_reg_to_deg << "\u00b0."s << '\n';
-  std::cout << "  3.0 radian ="s << std::setw(10)
+  std::cout << "   3.0 radians ="s << std::setw(9)
             << 3.0_reg_to_deg << "\u00b0."s << '\n';
-  std::cout << "    π radian ="s << std::setw(10)
+  std::cout << "     \u03c0 radians ="s << std::setw(9)
             << 3.14159265359_reg_to_deg << "\u00b0."s << '\n';
-  std::cout << "  3.5 radian ="s << std::setw(10)
+  std::cout << "   3.5 radians ="s << std::setw(9)
             << 3.5_reg_to_deg << "\u00b0."s << '\n';
-  std::cout << "  4.0 radian ="s << std::setw(10)
+  std::cout << "   4.0 radians ="s << std::setw(9)
             << 4.0_reg_to_deg << "\u00b0."s << '\n';
-  std::cout << "  4.5 radian ="s << std::setw(10)
+  std::cout << "   4.5 radians ="s << std::setw(9)
             << 4.0_reg_to_deg << "\u00b0."s << '\n';
-  std::cout << " 3π/2 radian ="s << std::setw(10)
+  std::cout << " 3\u22c5\u03c0\u00f72 radians ="s << std::setw(9)
             << 4.71238898038_reg_to_deg << "\u00b0."s << '\n';
-  std::cout << "  5.0 radian ="s << std::setw(10)
+  std::cout << "   5.0 radians ="s << std::setw(9)
             << 5.0_reg_to_deg << "\u00b0."s << '\n';
-  std::cout << "  5.5 radian ="s << std::setw(10)
+  std::cout << "   5.5 radians ="s << std::setw(9)
             << 5.5_reg_to_deg << "\u00b0."s << '\n';
-  std::cout << "  6.0 radian ="s << std::setw(10)
+  std::cout << "   6.0 radians ="s << std::setw(9)
             << 6.0_reg_to_deg << "\u00b0."s << '\n';
-  std::cout << "   2π radian ="s << std::setw(10)
+  std::cout << "   2\u22c5π radians ="s << std::setw(9)
             << 6.28318530718_reg_to_deg << "\u00b0."s << '\n';
-  std::cout << "  6.5 radian ="s << std::setw(10)
+  std::cout << "   6.5 radians ="s << std::setw(9)
             << 6.5_reg_to_deg << "\u00b0."s << '\n';
   std::cout << std::endl;
 
@@ -299,6 +315,8 @@ void conversions(void) {
 
 } /* namespace cvt::angular */
 
+// .+....|....+....|....+....|....+....|....+....|....+....|
+// MARK: - cvt::temp - Implementation.
 namespace cvt::temp {
 
 /*
@@ -381,8 +399,13 @@ void conversions(void) {
 
 } /* namespace cvt::temp */
 
+// .+....|....+....|....+....|....+....|....+....|....+....|
+// MARK: - cvt::si - Implementation.
 namespace cvt::si {
 
+/*
+ *  MARK: cvt::si::conversions()
+ */
 void conversions(void) {
   std::cout << "In function si::"
             << __func__ << "()\n";
